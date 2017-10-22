@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/fullPadding"
+    tools:context="com.example.oluwaseun.ajo.activities.english.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/rounded_button"
+        android:text="@string/registerYor"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/login_btn_size"
+        android:onClick="register"/>
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_weight="0.3"
+        android:background="@drawable/gradient"
+        android:text="@string/loginYor"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/login_btn_size"
+        android:onClick="login"
+        android:layout_marginBottom="@dimen/fullPadding"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
+
+
+
+</LinearLayout>

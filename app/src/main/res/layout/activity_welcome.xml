@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/fullPadding"
+    tools:context="com.example.oluwaseun.ajo.activities.english.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/english"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/rounded_button"
+        android:text="@string/english"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/login_btn_size"
+        android:onClick="englishLanguageOption"/>
+
+
+    <Button
+        android:id="@+id/yoruba"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_weight="0.3"
+        android:background="@drawable/gradient"
+        android:text="@string/yoruba"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/login_btn_size"
+        android:onClick="yorubaLanguageOption"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fullPadding"
+        android:layout_marginBottom="@dimen/fullPadding"
+        android:text="@string/caption"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/caption_size"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
+

@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="App2Theme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#8BC34A</item>
+        <!--<item name="colorPrimaryLight">#C8E6C9</item>-->
+        <!--<item name="colorPrimaryText">#212121</item>-->
+        <!--<item name="colorSecondaryText">#757575</item>-->
+        <!--<item name="icons">#FFFFFF</item>-->
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/gradient</item>
+
+    </style>
+
+    <style name="ActionBarTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="windowActionBar">@drawable/gradient</item>
+
+    </style>
+
+    <style name="App2Theme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="App2Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="App2Theme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
+
+

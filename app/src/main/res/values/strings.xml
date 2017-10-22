@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Ajo+</string>
+
+    <string name="yoruba">Yoruba</string>
+    <string name="english">English</string>
+    <string name="caption">...Providing Financial Freedom Naira by Naira...</string>
+
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+
+    <string name="registerYor">Forukọsilẹ</string>
+    <string name="loginYor">Wọle</string>
+
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+
+    <string name="emailYor">Email Addressi</string>
+    <string name="passwordYor">Pasiwordi</string>
+
+    <string name="identify">Identification</string>
+    <string name="name">Name</string>
+    <string name="dob">Date of Birth</string>
+    <string name="phone">Phone Number</string>
+    <string name="bvn">Bank Verification Number(BVN)</string>
+    <string name="bank">Name of Bank</string>
+    <string name="account">Bank Account Number</string>
+    <string name="next">Next</string>
+
+    <string name="registration">Registration</string>
+    <string name="username">Username</string>
+    <string name="confirm">Confirm Password</string>
+    <string name="question">Security Question</string>
+    <string name="answer">Answer to Security Question</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_dashboard_yor">DashboardYorActivity</string>
+</resources>
