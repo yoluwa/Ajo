@@ -48,10 +48,15 @@
         android:onClick="login"
         android:layout_marginBottom="@dimen/fullPadding"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fullPadding"
+        android:layout_marginBottom="@dimen/fullPadding"
+        android:text="@string/caption"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/caption_size"
+        android:layout_gravity="center_horizontal"/>
 
 
 

@@ -26,16 +26,37 @@
     <string name="account">Bank Account Number</string>
     <string name="next">Next</string>
 
+    <string name="identifyYor">Farahan</string>
+    <string name="nameYor">Oruko</string>
+    <string name="dobYor">Ojo Ibi</string>
+    <string name="phoneYor">Nomba Fonu</string>
+    <string name="bvnYor">Nomba ti Banki(BVN)</string>
+    <string name="bankYor">Oruko Banki</string>
+    <string name="accountYor">Akanti Nomba</string>
+    <string name="nextYor">Tesiwaju</string>
+
+
+
     <string name="registration">Registration</string>
     <string name="username">Username</string>
-    <string name="confirm">Confirm Password</string>
-    <string name="question">Security Question</string>
-    <string name="answer">Answer to Security Question</string>
+    <string name="confirm_pword">Confirm Password</string>
+    <string name="security_question">Security Question</string>
+    <string name="answer_security_question">Answer to Security Question</string>
+    <string name="create">Create Account</string>
+
+    <string name="registrationYor">Iforukosile</string>
+    <string name="usernameYor">Username</string>
+    <string name="confirm_pwordYor">Tun pasiwodi kole</string>
+    <string name="security_questionYor">Ibeere Ipaamo</string>
+    <string name="answer_security_questionYor">Idahun si Ibeere Ipaamo</string>
+    <string name="createYor">Da Akanti sile</string>
+
     <string name="title_activity_dashboard">DashboardActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
     <string name="title_activity_dashboard_yor">DashboardYorActivity</string>
 </resources>

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/fullPadding"
-    tools:context="com.example.oluwaseun.ajo.activities.english.MainActivity">
+    tools:context="com.example.oluwaseun.ajo.activities.WelcomeActivity"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,8 +15,12 @@
         android:layout_weight="3">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="70dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/colored_logo"/>
 
     </LinearLayout>
 
@@ -25,11 +30,11 @@
         android:layout_height="@dimen/btn_height"
         android:layout_marginBottom="20dp"
         android:layout_weight="0.3"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/colored_rounded_button"
         android:text="@string/english"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/dark"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/login_btn_size"
         android:onClick="englishLanguageOption"/>
 
@@ -39,11 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
         android:layout_weight="0.3"
-        android:background="@drawable/gradient"
+        android:background="@android:color/white"
         android:text="@string/yoruba"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@android:color/white"
+        android:textColor="@color/dark"
         android:textSize="@dimen/login_btn_size"
         android:onClick="yorubaLanguageOption"/>
 
@@ -53,7 +58,7 @@
         android:layout_marginTop="@dimen/fullPadding"
         android:layout_marginBottom="@dimen/fullPadding"
         android:text="@string/caption"
-        android:textColor="@android:color/white"
+        android:textColor="@color/dark"
         android:textSize="@dimen/caption_size"
         android:layout_gravity="center_horizontal"/>
 

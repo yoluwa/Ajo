@@ -11,16 +11,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:layout_gravity="center_horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="70dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/sign_up"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
         android:layout_marginBottom="20dp"
@@ -35,10 +40,8 @@
 
 
     <Button
-        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
-        android:layout_marginBottom="@dimen/fullPadding"
         android:layout_weight="0.3"
         android:background="@drawable/gradient"
         android:onClick="login"
@@ -49,10 +52,14 @@
         android:textSize="@dimen/login_btn_size" />
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fullPadding"
+        android:text="@string/caption"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/caption_size"
+        android:layout_gravity="center_horizontal"/>
 
 
 </LinearLayout>

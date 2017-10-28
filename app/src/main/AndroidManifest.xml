@@ -4,11 +4,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/naira"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/naira"
         android:supportsRtl="true"
-        android:theme="@style/App2Theme">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.english.MainActivity"
             android:theme="@style/NoActionBarTheme" />
@@ -17,7 +17,7 @@
             android:theme="@style/NoActionBarTheme" />
         <activity
             android:name=".activities.WelcomeActivity"
-            android:theme="@style/NoActionBarTheme">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,31 +31,31 @@
             android:name=".activities.yoruba.LoginYorActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity
-            android:name=".activities.english.Register1Activity"
-            android:theme="@style/ActionBarTheme" />
+            android:name=".activities.english.Register1Activity"/>
+
         <activity
             android:name=".activities.yoruba.RegisterYor1Activity"
-            android:theme="@style/ActionBarTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.english.Register2Activity"
-            android:theme="@style/ActionBarTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.english.Register3Activity"
-            android:theme="@style/ActionBarTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.yoruba.RegisterYor2Activity"
-            android:theme="@style/ActionBarTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.yoruba.RegisterYor3Activity"
-            android:theme="@style/ActionBarTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.english.DashboardActivity"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/App2Theme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.yoruba.DashboardYorActivity"
             android:label="@string/title_activity_dashboard_yor"
-            android:theme="@style/App2Theme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
