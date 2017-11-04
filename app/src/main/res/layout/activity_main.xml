@@ -56,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/fullPadding"
+        android:layout_marginBottom="@dimen/fullPadding"
         android:text="@string/caption"
         android:textColor="@android:color/white"
         android:textSize="@dimen/caption_size"

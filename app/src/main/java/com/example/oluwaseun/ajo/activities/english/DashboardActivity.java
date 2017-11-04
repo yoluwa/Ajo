@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,9 +16,20 @@ import android.view.View;
 
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.AbstractActivity;
+import com.example.oluwaseun.ajo.fragments.CreateGroupFragment;
+import com.example.oluwaseun.ajo.fragments.HomeFragment;
+import com.example.oluwaseun.ajo.fragments.JoinGroupFragment;
+import com.example.oluwaseun.ajo.fragments.SettingsFragment;
 
 public class DashboardActivity extends AbstractActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+
+        //Note : OnFragmentInteractionListener of all the fragments
+        implements
+        HomeFragment.OnFragmentInteractionListener,
+        CreateGroupFragment.OnFragmentInteractionListener,
+        JoinGroupFragment.OnFragmentInteractionListener,
+        SettingsFragment.OnFragmentInteractionListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,14 @@ public class DashboardActivity extends AbstractActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //NOTE:  Checks first item in the navigation drawer initially
+        navigationView.setCheckedItem(R.id.nav_home);
+
+        //NOTE:  Open fragment1 initially.
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.mainFrame, new HomeFragment());
+        ft.commit();
     }
 
     @Override
@@ -76,28 +97,42 @@ public class DashboardActivity extends AbstractActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        //NOTE: creating fragment object
+        Fragment fragment = null;
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_home) {
+            fragment = new HomeFragment();
+        } else if (id == R.id.nav_create) {
+            fragment = new CreateGroupFragment();
+        }else if (id == R.id.nav_join) {
+            fragment = new JoinGroupFragment();
+        }else if (id == R.id.nav_settings) {
+            fragment = new SettingsFragment();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //NOTE: Fragment changing code
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame, fragment);
+            ft.commit();
+        }
+
+        //NOTE:  Closing the drawer after selecting
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout); //Ya you can also globalize this variable :P
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void onFragmentInteraction(String title) {
+        // NOTE:  Code to replace the toolbar title based current visible fragment
+        getSupportActionBar().setTitle(title);
+    }
+
 }
