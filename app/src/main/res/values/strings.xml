@@ -61,4 +61,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="activeGroups">Active Contribution Groups</string>
+    <string name="archivedGroups">Archived Contribution Groups</string>
+    <string name="group1Name">Ajo Group 1</string>
+    <string name="group2Name">Ajo Group 1</string>
+    <string name="group3Name">Ajo Group 1</string>
+    <string name="group1Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
+    <string name="group2Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
+    <string name="group3Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
 </resources>
