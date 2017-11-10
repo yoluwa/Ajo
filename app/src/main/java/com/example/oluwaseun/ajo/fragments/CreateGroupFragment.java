@@ -75,6 +75,10 @@ public class CreateGroupFragment extends Fragment {
         // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
         // btn1.setOnclickListener(...
 
+
+
+
+
         return view;
     }
 

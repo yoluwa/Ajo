@@ -70,4 +70,25 @@
     <string name="group1Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
     <string name="group2Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
     <string name="group3Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
+
+    <string name="createGroup">"Create Contribution Group"</string>
+    <string name="home">"Home"</string>
+    <string name="joinGroup">"Join Contribution Group"</string>
+    <string name="settings">Settings</string>
+    <string name="groupName">Name of Contribution Group</string>
+    <string name="frequency">Frequency of Contribution</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="maxNumber">Maximum Number of Users</string>
+    <string name="selectMembers">Add members to the group by email address</string>
+    <string name="sequence">Collection Sequence</string>
+    <string name="fcfs">First Come First Served</string>
+    <string name="random">Random</string>
+    <string name="tAndC">Terms and Conditions</string>
+
+    <string name="groupPurpose">Choose the Reason for  Contribution</string>
+    <string name="house">House/School</string>
+    <string name="family">Family</string>
+    <string name="gift">Gift</string>
 </resources>

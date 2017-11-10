@@ -9,7 +9,7 @@
     tools:context="com.example.oluwaseun.ajo.activities.english.DashboardActivity"
     tools:showIn="@layout/app_bar_dashboard">
 
-    <!-- Note : This is the container Frame Layout for all the fragmetns-->
+    <!-- Note : This is the container Frame Layout for all the fragments-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
