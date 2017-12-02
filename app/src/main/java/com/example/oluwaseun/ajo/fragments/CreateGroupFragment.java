@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.example.oluwaseun.ajo.R;
 
@@ -74,6 +76,49 @@ public class CreateGroupFragment extends Fragment {
         // Here we will can create click listners etc for all the gui elements on the fragment.
         // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
         // btn1.setOnclickListener(...
+
+        EditText groupName = (EditText) view.findViewById(R.id.group1Name);
+        EditText member1 = view.findViewById(R.id.member1);
+        EditText member2 = view.findViewById(R.id.member2);
+        EditText member3 = view.findViewById(R.id.member3);
+        EditText member4 = view.findViewById(R.id.member4);
+        EditText member5 = view.findViewById(R.id.member5);
+
+        RadioButton house = (RadioButton) view.findViewById(R.id.house);
+        RadioButton family = (RadioButton) view.findViewById(R.id.family);
+        RadioButton gift = (RadioButton) view.findViewById(R.id.gift);
+
+        String reason, frequency;
+
+        if (house.isChecked()){
+            reason = house.getText().toString();
+        }
+        else if(family.isChecked()){
+            reason = family.getText().toString();
+        }
+        else if(gift.isChecked()){
+            reason = gift.getText().toString();
+        }
+        else{
+            reason = "none";
+        }
+
+        RadioButton daily = (RadioButton) view.findViewById(R.id.daily);
+        RadioButton weekly = (RadioButton) view.findViewById(R.id.weekly);
+        RadioButton monthly = (RadioButton) view.findViewById(R.id.monthly);
+
+        if (daily.isChecked()){
+            frequency = daily.getText().toString();
+        }
+        else if(weekly.isChecked()){
+            frequency = weekly.getText().toString();
+        }
+        else if(monthly.isChecked()){
+            frequency = monthly.getText().toString();
+        }
+        else{
+            frequency = "none";
+        }
 
 
 

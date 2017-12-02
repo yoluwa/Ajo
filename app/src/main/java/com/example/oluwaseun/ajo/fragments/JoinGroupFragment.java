@@ -3,9 +3,11 @@ package com.example.oluwaseun.ajo.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.oluwaseun.ajo.R;
 
@@ -75,6 +77,80 @@ public class JoinGroupFragment extends Fragment {
         // Here we will can create click listners etc for all the gui elements on the fragment.
         // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
         // btn1.setOnclickListener(...
+
+        CardView group1 = view.findViewById(R.id.group1);
+        CardView group2 =  view.findViewById(R.id.group2);
+        CardView group3 = view.findViewById(R.id.group3);
+
+//        group1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        group2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        group3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+        Button group1Accept = view.findViewById(R.id.group1Accept);
+        Button group2Accept = view.findViewById(R.id.group2Accept);
+        Button group3Accept = view.findViewById(R.id.group3Accept);
+        Button group1Decline = view.findViewById(R.id.group1Decline);
+        Button group2Decline = view.findViewById(R.id.group2Decline);
+        Button group3Decline = view.findViewById(R.id.group3Decline);
+
+//        group1Accept.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        group2Accept.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        group3Accept.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        group1Decline.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        group2Decline.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        group3Decline.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         return view;
     }
