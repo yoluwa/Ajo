@@ -7,8 +7,12 @@ import android.widget.EditText;
 
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.AbstractActivity;
+import com.example.oluwaseun.ajo.models.User;
 
 public class Register1Activity extends AbstractActivity {
+
+    public String nameString, dateOfBirth, bvnString, phoneNumberString, accountNumberString,
+            bankNameString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,32 +21,35 @@ public class Register1Activity extends AbstractActivity {
     }
 
     //Method to get all User Input data
-
-    private void getUserIdentificationData(View view){
+    private void getUserIdentificationData(View view) {
 
         EditText name = (EditText) findViewById(R.id.name);
-        String nameString = name.getText().toString();
+        nameString = name.getText().toString().trim();
 
         EditText dob = (EditText) findViewById(R.id.dob);
-        String dateOfBirth = dob.getText().toString();
+        dateOfBirth = dob.getText().toString().trim();
 
         EditText bvn = (EditText) findViewById(R.id.bvn);
-        String bvnString = bvn.getText().toString();
+        bvnString = bvn.getText().toString().trim();
 
         EditText phoneNumber = (EditText) findViewById(R.id.phoneNumber);
-        String phoneNumberString = phoneNumber.getText().toString();
+        phoneNumberString = phoneNumber.getText().toString().trim();
 
         EditText accountNumber = (EditText) findViewById(R.id.accountNumber);
-        String accountNumberString = accountNumber.getText().toString();
+        accountNumberString = accountNumber.getText().toString().trim();
 
         EditText bankName = (EditText) findViewById(R.id.bankName);
-        String bankNameString = bankName.getText().toString();
+        bankNameString = bankName.getText().toString().trim();
 
 
     }
 
-    public void next(View v){
+    public void next(View v) {
+        getUserIdentificationData(v);
+        User user = new User(nameString, dateOfBirth, bvnString, phoneNumberString,
+                accountNumberString, bankNameString);
         Intent in = new Intent(Register1Activity.this, Register2Activity.class);
+        in.putExtra("user", user);
         startActivity(in);
     }
 }
