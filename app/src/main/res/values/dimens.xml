@@ -6,7 +6,7 @@
 
     <dimen name="btn_height">25dp</dimen>
 
-    <dimen name="login_btn_size">20sp</dimen>
+    <dimen name="login_btn_size">30sp</dimen>
     <dimen name="caption_size">13sp</dimen>
 
     <dimen name="topic_text">25sp</dimen>

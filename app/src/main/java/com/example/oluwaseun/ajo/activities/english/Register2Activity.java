@@ -26,7 +26,7 @@ public class Register2Activity extends AbstractActivity {
     private ProgressDialog progressDialog;
     public String nameString, dateOfBirth, bvnString, phoneNumberString, accountNumberString,
             bankNameString;
-    public String emailString, passwordString, confirmPasswordString, securityQuestionString,
+    public String emailString, passwordString, passwordStr, confirmPasswordString, securityQuestionString,
             answerToSecurityQuestionString;
     public int phone, account_number, bvn;
 
@@ -45,10 +45,17 @@ public class Register2Activity extends AbstractActivity {
         emailString = email.getText().toString().trim();
 
         EditText password = (EditText) findViewById(R.id.password);
-        passwordString = password.getText().toString().trim();
+        passwordStr = password.getText().toString().trim();
 
         EditText confirmPassword = (EditText) findViewById(R.id.confirm_password);
         confirmPasswordString = confirmPassword.getText().toString().trim();
+
+        if (passwordStr.equals(confirmPasswordString)) {
+            passwordString = passwordStr;
+        }
+        else {
+            //
+            }
 
         EditText securityQuestion = (EditText) findViewById(R.id.security_question);
         securityQuestionString = securityQuestion.getText().toString().trim();
