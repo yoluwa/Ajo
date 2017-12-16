@@ -1,34 +1,38 @@
 package com.example.oluwaseun.ajo.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+
+import com.example.oluwaseun.ajo.activities.english.LoginActivity;
 
 import java.util.HashMap;
 
 /**
- * Created by Oluwaseun on 14/12/2017.
+ * Created by Damola on 14/12/2017.
  */
 
 public class SessionManager {
+    //Bundle credentials = getIntent().getExtras();
 
     //Shared Preference mode
-    int Private_Mode =0;
+    private int Private_Mode =0;
     //SharePref filename;
     private static final String PREF_NAME = "ajoo";
     //All Shared Preference keys
     private static final String IS_LOGIN = "isLoggedIn";
 
     //User token / name
-    public static final String TOEKN =  "_token";
+    private static final String TOKEN =  "_token";
 
-    public static final String NAME = "name";
+    private static final String NAME = "name";
     //SharedPreference Editore
-    public SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor;
     //Activity Context
-    public Context _context;
+    private Context _context;
 
     //SharedPreferences
-    public SharedPreferences preferences;
+    private SharedPreferences preferences;
     public SessionManager(Context context){
         this._context = context;
 
@@ -40,7 +44,7 @@ public class SessionManager {
     //create a login session
     public void createLoginSession(String token, String name){
         editor.putBoolean(IS_LOGIN,true);
-        editor.putString(TOEKN,token);
+        editor.putString(TOKEN,token);
         editor.putString(NAME,name);
         editor.commit();
     }
@@ -50,7 +54,7 @@ public class SessionManager {
     public HashMap<String, String> getUserDetails(){
         HashMap<String,String> userLogin = new HashMap<String, String>();
         //user token
-        userLogin.put(TOEKN,preferences.getString(TOEKN,null));
+        userLogin.put(TOKEN,preferences.getString(TOKEN,null));
         //get other param you saved eaerlier
         userLogin.put(NAME, preferences.getString(NAME,null));
         //return user
@@ -60,6 +64,10 @@ public class SessionManager {
     public void checkLogin(){
         if (!this.isLoggedIn()){
             //goto login screen
+            Intent i =  new Intent(_context, LoginActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            _context.startActivity(i);
         }
     }
 
@@ -69,10 +77,14 @@ public class SessionManager {
         editor.commit();
 
         //after log out rediredct to login or home page
+        Intent i = new Intent(_context,WelcomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        _context.startActivity(i);
         //_context.startActivities(i );
     }
 
-    public boolean isLoggedIn(){
+    private boolean isLoggedIn(){
         return this.preferences.getBoolean(IS_LOGIN,false);
     }
 

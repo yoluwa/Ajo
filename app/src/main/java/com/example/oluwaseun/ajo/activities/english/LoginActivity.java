@@ -14,6 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.AbstractActivity;
+import com.example.oluwaseun.ajo.activities.SessionManager;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
 import org.json.JSONException;
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AbstractActivity {
 
-    public String emailString, passwordString;
+    public String emailString, passwordString, userToken;
     private ProgressDialog progressDialog;
 
     @Override
@@ -59,11 +60,15 @@ public class LoginActivity extends AbstractActivity {
                         try {
                             String status = response.getString("status");
                             JSONObject data = response.getJSONObject("data");
+                            String token = data.getString("token");
                             if (status.equals("success")) {
                                 progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this,
                                         "Login is Successful", Toast.LENGTH_LONG).show();
-//                                String userToken = data.token.toString();
+                                userToken = token;
+                                SessionManager sessionManager = new SessionManager(getApplicationContext());
+                                sessionManager.createLoginSession(userToken,emailString);
+
                                 Intent in = new Intent(LoginActivity.this, DashboardActivity.class);
                                 startActivity(in);
 
