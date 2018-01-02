@@ -296,7 +296,8 @@
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/login_btn_size" />
+                    android:textSize="@dimen/login_btn_size"
+                    android:id="@+id/createGroup"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -18,7 +18,7 @@ public class SessionManager {
     //Shared Preference mode
     private int Private_Mode =0;
     //SharePref filename;
-    private static final String PREF_NAME = "ajoo";
+    private static final String PREF_NAME = "ajo";
     //All Shared Preference keys
     private static final String IS_LOGIN = "isLoggedIn";
 
@@ -26,7 +26,7 @@ public class SessionManager {
     private static final String TOKEN =  "_token";
 
     private static final String NAME = "name";
-    //SharedPreference Editore
+    //SharedPreference Editor
     private SharedPreferences.Editor editor;
     //Activity Context
     private Context _context;

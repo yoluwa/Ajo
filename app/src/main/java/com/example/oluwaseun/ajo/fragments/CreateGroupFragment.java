@@ -1,15 +1,27 @@
 package com.example.oluwaseun.ajo.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
+import com.example.oluwaseun.ajo.utils.Endpoint;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +42,13 @@ public class CreateGroupFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    public String groupNameString, member1String, member2String, member3String,
+            member4String, member5String;
+   // public String membersString;
+
+    public String reason, frequency;
+    private ProgressDialog progressDialog;
 
     public CreateGroupFragment() {
         // Required empty public constructor
@@ -77,18 +96,24 @@ public class CreateGroupFragment extends Fragment {
         // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
         // btn1.setOnclickListener(...
 
-        EditText groupName = (EditText) view.findViewById(R.id.group1Name);
+
+        EditText groupName = (EditText) view.findViewById(R.id.groupName);
+        groupNameString = groupName.getText().toString().trim();
         EditText member1 = view.findViewById(R.id.member1);
+        member1String = member1.getText().toString().trim();
         EditText member2 = view.findViewById(R.id.member2);
+        member2String = member2.getText().toString().trim();
         EditText member3 = view.findViewById(R.id.member3);
+        member3String = member3.getText().toString().trim();
         EditText member4 = view.findViewById(R.id.member4);
+        member4String = member4.getText().toString().trim();
         EditText member5 = view.findViewById(R.id.member5);
+        member5String = member5.getText().toString().trim();
 
         RadioButton house = (RadioButton) view.findViewById(R.id.house);
         RadioButton family = (RadioButton) view.findViewById(R.id.family);
         RadioButton gift = (RadioButton) view.findViewById(R.id.gift);
 
-        String reason, frequency;
 
         if (house.isChecked()){
             reason = house.getText().toString();
@@ -121,7 +146,100 @@ public class CreateGroupFragment extends Fragment {
         }
 
 
+        //Code for the Button Method.. I saw it online and modified it
+        Button createGroup = (Button) view.findViewById(R.id.createGroup);
+        createGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // here you set what you want to do when user clicks your button,
 
+                //expected payload for a group is name, reason, frequency and members which
+                // is a string of the emails to be added separated by a comma with no spaces
+                // in between
+
+                //validation will be done after the stuff works as done in registration
+                //authorization header stuff is not yet done
+
+                JSONObject group = new JSONObject();
+                try {
+                    group.put("name", groupNameString);
+                    group.put ("reason", reason);
+                    group.put("frequency", frequency);
+                    group.put("members", member1String);
+                }
+                catch (JSONException e){
+
+                }
+
+                //Volley Request for the group
+
+
+
+
+                JsonObjectRequest createGroupRequest = new JsonObjectRequest(Endpoint.CREATE_GROUP, group,
+
+                        //when you can access the server
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject serverResponse) {
+                                try {
+                                    String status = serverResponse.getString("status");
+
+                                    //Log.d("Reg2",status);
+                                    if (status.equals("success")) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getContext(),
+                                                "Contribution Group Created Successfully", Toast.LENGTH_LONG).show();
+                                        //getContect() was used because i do not know how to reference the
+                                        // activity that this fragemnt extends
+
+                                        //There should be an intent to take to a reusable fragment
+                                        // that displays the detail of a contribution group
+
+                                        //Intent in = new Intent(getContext(), Register3Activity.class);
+                                        //in.putExtra("email", emailString);
+                                        //startActivity(in);
+                                    } else {
+                                        JSONObject data = serverResponse.getJSONObject("data");
+//                                Log.i("Data response:", data.toString());
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getContext(),
+                                                "Contribution Group Not Created", Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    progressDialog.dismiss();
+//                            Log.e("Error:", e.toString());
+                                    Toast.makeText(getContext(),
+                                            "Sever not Responding", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        },
+
+                        //when you cant register the user
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+//                        Log.i("Error:", error.toString());
+
+                                progressDialog.dismiss();
+                                Toast.makeText(getContext(),
+                                        "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+
+                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                requestQueue.add(createGroupRequest);
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Please wait, your contribution group is being created.");
+                progressDialog.show();
+
+
+
+            }
+        });
 
 
         return view;
@@ -165,4 +283,5 @@ public class CreateGroupFragment extends Fragment {
         // NOTE : We changed the Uri to String.
         void onFragmentInteraction(String title);
     }
+
 }
