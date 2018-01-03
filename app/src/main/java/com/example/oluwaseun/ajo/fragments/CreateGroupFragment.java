@@ -12,16 +12,21 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
+import com.example.oluwaseun.ajo.activities.SessionManager;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -228,7 +233,19 @@ public class CreateGroupFragment extends Fragment {
                                         "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
                             }
                         }
-                );
+                ){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError{
+                        Map<String, String> headers = new HashMap<>();
+                        SessionManager sessionManager = new SessionManager(getContext());
+                        //get current user access token
+                        String token = sessionManager.getUserDetails().toString();
+                        headers.put("Content-Type","application/json");
+                        headers.put("Authorization",token);
+                        return  headers;
+                    }
+
+                };
 
                 RequestQueue requestQueue = Volley.newRequestQueue(getContext());
                 requestQueue.add(createGroupRequest);
