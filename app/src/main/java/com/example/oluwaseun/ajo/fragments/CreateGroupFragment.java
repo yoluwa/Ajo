@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -225,9 +226,7 @@ public class CreateGroupFragment extends Fragment {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-
-//                        Log.i("Error:", error.toString());
-
+                                Log.i("Error:", error.toString());
                                 progressDialog.dismiss();
                                 Toast.makeText(getContext(),
                                         "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
@@ -239,9 +238,10 @@ public class CreateGroupFragment extends Fragment {
                         Map<String, String> headers = new HashMap<>();
                         SessionManager sessionManager = new SessionManager(getContext());
                         //get current user access token
-                        String token = sessionManager.getUserDetails().toString();
-                        headers.put("Content-Type","application/json");
+                        String token = sessionManager.getUserToken().toString();
                         headers.put("Authorization",token);
+                        headers.put("Content-Type","application/json");
+                        Log.i("Header", headers.toString());
                         return  headers;
                     }
 

@@ -23,7 +23,7 @@ public class SessionManager {
     private static final String IS_LOGIN = "isLoggedIn";
 
     //User token / name
-    private static final String TOKEN =  "_token";
+    private static final String TOKEN =  "token";
 
     private static final String NAME = "name";
     //SharedPreference Editor
@@ -55,8 +55,17 @@ public class SessionManager {
         HashMap<String,String> userLogin = new HashMap<String, String>();
         //user token
         userLogin.put(TOKEN,preferences.getString(TOKEN,null));
-        //get other param you saved eaerlier
+        //get other param you saved earlier
         userLogin.put(NAME, preferences.getString(NAME,null));
+        //return user
+        return userLogin;
+    }
+
+    //get user token only from user session
+    public HashMap<String, String> getUserToken(){
+        HashMap<String,String> userLogin = new HashMap<String, String>();
+        //user token
+        userLogin.put(TOKEN,preferences.getString(TOKEN,null));
         //return user
         return userLogin;
     }
