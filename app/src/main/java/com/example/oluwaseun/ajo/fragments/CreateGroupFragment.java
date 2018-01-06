@@ -64,11 +64,30 @@ public class CreateGroupFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     *
      * @return A new instance of fragment CreateGroupFragment.
      */
     // TODO: Rename and change types and number of parameters
+
+    private String getMembers(String m, String m1, String m2, String m3, String m4){
+        String members = "";
+        if (!m.isEmpty() && !m1.isEmpty() && !m2.isEmpty() && !m3.isEmpty() && !m4.isEmpty()){
+            members = m + ","+ m1 + "," + m2 + "," + m3 + "," + m4;
+        }
+        else if(!m.isEmpty()&& !m1.isEmpty() && !m2.isEmpty() && !m3.isEmpty()){
+            members = m + ","+ m1 + "," + m2 + "," + m3;
+        }
+        else if(!m1.isEmpty() && !m1.isEmpty() && !m2.isEmpty()){
+            members = m + ","+ m1 + "," + m2;
+        }
+        else if(!m1.isEmpty() && !m1.isEmpty()){
+            members = m + ","+ m1;
+        }
+        else{
+            members = "";
+        }
+        return  members;
+    }
     public static CreateGroupFragment newInstance(String param1, String param2) {
         CreateGroupFragment fragment = new CreateGroupFragment();
         Bundle args = new Bundle();
@@ -87,25 +106,10 @@ public class CreateGroupFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_create_group, container, false);
-
-        // NOTE : We are calling the onFragmentInteraction() declared in the MainActivity
-        // ie we are sending "Fragment 1" as title parameter when fragment1 is activated
-        if (mListener != null) {
-            mListener.onFragmentInteraction("Create Contribution Group");
-        }
-
-        // Here we will can create click listners etc for all the gui elements on the fragment.
-        // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
-        // btn1.setOnclickListener(...
-
-
+    public void getGroupData(View view) {
         EditText groupName = (EditText) view.findViewById(R.id.groupName);
         groupNameString = groupName.getText().toString().trim();
-        EditText member1 = view.findViewById(R.id.member1);
+        EditText member1 = (EditText) view.findViewById(R.id.member1);
         member1String = member1.getText().toString().trim();
         EditText member2 = view.findViewById(R.id.member2);
         member2String = member2.getText().toString().trim();
@@ -115,6 +119,7 @@ public class CreateGroupFragment extends Fragment {
         member4String = member4.getText().toString().trim();
         EditText member5 = view.findViewById(R.id.member5);
         member5String = member5.getText().toString().trim();
+
 
         RadioButton house = (RadioButton) view.findViewById(R.id.house);
         RadioButton family = (RadioButton) view.findViewById(R.id.family);
@@ -151,68 +156,78 @@ public class CreateGroupFragment extends Fragment {
             frequency = "none";
         }
 
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View view= inflater.inflate(R.layout.fragment_create_group, container, false);
+
+        // NOTE : We are calling the onFragmentInteraction() declared in the MainActivity
+        // ie we are sending "Fragment 1" as title parameter when fragment1 is activated
+        if (mListener != null) {
+            mListener.onFragmentInteraction("Create Contribution Group");
+        }
+
+        // Here we will can create click listners etc for all the gui elements on the fragment.
+        // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
+        // btn1.setOnclickListener(...
+
+
+
+
+        /*String members = getMembers(member1String,member2String,member3String,member4String,member5String);
+*/
         //Code for the Button Method.. I saw it online and modified it
         Button createGroup = (Button) view.findViewById(R.id.createGroup);
         createGroup.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                // here you set what you want to do when user clicks your button,
-
-                //expected payload for a group is name, reason, frequency and members which
-                // is a string of the emails to be added separated by a comma with no spaces
-                // in between
-
-                //validation will be done after the stuff works as done in registration
-                //authorization header stuff is not yet done
 
                 JSONObject group = new JSONObject();
+                getGroupData(view);
+                String members = getMembers(member1String,member2String,member3String,member4String,member5String);
+                //EditText h = (EditText)view.findViewById(R.id.member1);
+                Log.i("members",members);
                 try {
                     group.put("name", groupNameString);
                     group.put ("reason", reason);
                     group.put("frequency", frequency);
-                    group.put("members", member1String);
+                    group.put("members", members);
                 }
                 catch (JSONException e){
 
                 }
-
                 //Volley Request for the group
 
-
-
-
                 JsonObjectRequest createGroupRequest = new JsonObjectRequest(Endpoint.CREATE_GROUP, group,
-
                         //when you can access the server
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject serverResponse) {
                                 try {
                                     String status = serverResponse.getString("status");
-
-                                    //Log.d("Reg2",status);
+                                    JSONObject data = serverResponse.getJSONObject("data");
+                                    Log.i("Status",status);
+                                    Log.i("Data response:",data.toString() );
                                     if (status.equals("success")) {
                                         progressDialog.dismiss();
                                         Toast.makeText(getContext(),
                                                 "Contribution Group Created Successfully", Toast.LENGTH_LONG).show();
-                                        //getContect() was used because i do not know how to reference the
-                                        // activity that this fragemnt extends
-
-                                        //There should be an intent to take to a reusable fragment
-                                        // that displays the detail of a contribution group
-
-                                        //Intent in = new Intent(getContext(), Register3Activity.class);
-                                        //in.putExtra("email", emailString);
-                                        //startActivity(in);
-                                    } else {
-                                        JSONObject data = serverResponse.getJSONObject("data");
-//                                Log.i("Data response:", data.toString());
+                                        //Intent in = new Intent(Register2Activity.this, Register3Activity.class);
+                                        //startActivity(in)
+                                    }
+                                    else {
+                                       // String mem = getMembers(member1String,member2String,member3String,member4String,member5String);
+                                        Log.i("Status",status);
+                                        Log.i("Data response:",data.toString() );
                                         progressDialog.dismiss();
                                         Toast.makeText(getContext(),
-                                                "Contribution Group Not Created", Toast.LENGTH_LONG).show();
+                                                "Contribution Group Not Created Successfully ", Toast.LENGTH_LONG).show();
                                     }
-                                } catch (JSONException e) {
+                                }
+                                catch (JSONException e) {
                                     progressDialog.dismiss();
 //                            Log.e("Error:", e.toString());
                                     Toast.makeText(getContext(),
@@ -238,7 +253,7 @@ public class CreateGroupFragment extends Fragment {
                         Map<String, String> headers = new HashMap<>();
                         SessionManager sessionManager = new SessionManager(getContext());
                         //get current user access token
-                        String token = sessionManager.getUserToken().toString();
+                        String token = sessionManager.getUserToken().get("token");
                         headers.put("Authorization",token);
                         headers.put("Content-Type","application/json");
                         Log.i("Header", headers.toString());
@@ -252,8 +267,6 @@ public class CreateGroupFragment extends Fragment {
                 progressDialog = new ProgressDialog(getContext());
                 progressDialog.setMessage("Please wait, your contribution group is being created.");
                 progressDialog.show();
-
-
 
             }
         });

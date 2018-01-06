@@ -66,6 +66,7 @@ public class SessionManager {
         HashMap<String,String> userLogin = new HashMap<String, String>();
         //user token
         userLogin.put(TOKEN,preferences.getString(TOKEN,null));
+
         //return user
         return userLogin;
     }
