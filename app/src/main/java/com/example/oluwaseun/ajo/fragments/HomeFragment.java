@@ -78,9 +78,6 @@ public class HomeFragment extends Fragment {
         CardView group1 = view.findViewById(R.id.group1);
         CardView group2 =  view.findViewById(R.id.group2);
         CardView group3 = view.findViewById(R.id.group3);
-        CardView groupOld1 = view.findViewById(R.id.groupOld1);
-        CardView groupOld2 = view.findViewById(R.id.groupOld2);
-        CardView groupOld3 = view.findViewById(R.id.groupOld3);
 
         group1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,30 +100,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        groupOld1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        groupOld2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        groupOld3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         // Here we will can create click listners etc for all the gui elements on the fragment.
         // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
         // btn1.setOnclickListener(...
+
+
+
 
         return view;
     }

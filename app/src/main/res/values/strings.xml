@@ -4,6 +4,7 @@
     <string name="yoruba">Yoruba</string>
     <string name="english">English</string>
     <string name="caption">...Providing Financial Freedom Naira by Naira...</string>
+    <string name="about">About</string>
 
     <string name="register">Register</string>
     <string name="login">Login</string>
@@ -19,7 +20,7 @@
 
     <string name="identify">Identification</string>
     <string name="name">Name</string>
-    <string name="dob">Date of Birth (dd/mm/yy)</string>
+    <string name="dob">Date of Birth (dd/mm/yyyy)</string>
     <string name="phone">Phone Number</string>
     <string name="bvn">Bank Verification Number(BVN)</string>
     <string name="bank">Name of Bank</string>
@@ -91,4 +92,6 @@
     <string name="house">House/School</string>
     <string name="family">Family</string>
     <string name="gift">Gift</string>
+
+    <string name="userProfile">User Profile</string>
 </resources>
