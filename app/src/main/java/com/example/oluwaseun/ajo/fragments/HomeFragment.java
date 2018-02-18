@@ -6,18 +6,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.english.ContributionGroupActivity;
 import com.example.oluwaseun.ajo.activities.english.DashboardActivity;
 import com.example.oluwaseun.ajo.activities.english.LoginActivity;
+import com.example.oluwaseun.ajo.utils.Endpoint;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import co.paystack.android.Paystack;
 import co.paystack.android.PaystackSdk;
+import co.paystack.android.Transaction;
+import co.paystack.android.model.Card;
+import co.paystack.android.model.Charge;
 
 
 /**
@@ -198,8 +210,50 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(HomeFragment.this, ContributionGroupActivity.class);
-                startActivity(in);
+                /*Intent in = new Intent(HomeFragment.this, ContributionGroupActivity.class);
+                startActivity(in);*/
+                String cardNumber = "4084084084084081";
+                int expiryMonth = 11; //any month in the future
+                int expiryYear = 18; // any year in the future. '2018' would work also!
+                String cvv = "408";  // cvv of the test card
+
+                Card card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+                if (card.isValid()) {
+                    // charge card
+                    Charge charge = new Charge();
+                    charge.setCard(card); //sets the card to charge
+                    PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
+                        @Override
+                        public void onSuccess(Transaction transaction) {
+                            // send reference to api
+
+                            Log.d("payment Success", transaction.getReference());
+                           /* final JsonObjectRequest referenceToken = new JsonObjectRequest(Endpoint.FUND_REFERENCE, transaction.getReference(), new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String respond = response.getString("name");
+
+                                    }catch (JSONException ex){
+
+                                    }
+                                }
+                            });*/
+                        }
+
+                        @Override
+                        public void beforeValidate(Transaction transaction) {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable error, Transaction transaction) {
+
+                        }
+                    });
+                } else {
+                    //do something
+                }
 
 
             }
@@ -220,6 +274,12 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    public void performCharge(){
+        Charge charge = new Charge();
+        //charge.setCard(card); //sets the card to charge
+
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event
