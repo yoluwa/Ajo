@@ -38,4 +38,8 @@ dependencies {
 }
 
 
+dependencies {
+    compile 'co.paystack.android:paystack:3.0.9'
+}
+
 
