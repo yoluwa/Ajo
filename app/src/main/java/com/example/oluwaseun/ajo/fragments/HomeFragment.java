@@ -1,14 +1,23 @@
 package com.example.oluwaseun.ajo.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.oluwaseun.ajo.R;
+import com.example.oluwaseun.ajo.activities.english.ContributionGroupActivity;
+import com.example.oluwaseun.ajo.activities.english.DashboardActivity;
+import com.example.oluwaseun.ajo.activities.english.LoginActivity;
+
+import co.paystack.android.PaystackSdk;
 
 
 /**
@@ -31,6 +40,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private ProgressDialog progressDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -57,6 +68,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //initializing pastack
+        PaystackSdk.initialize(getContext());
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -104,6 +120,101 @@ public class HomeFragment extends Fragment {
         // Here we will can create click listners etc for all the gui elements on the fragment.
         // For eg: Button btn1= (Button) view.findViewById(R.id.frag1_btn1);
         // btn1.setOnclickListener(...
+
+
+
+
+
+
+        //JSONRequest to get details for user profile
+//
+//        JsonObjectRequest createGroupRequest = new JsonObjectRequest(Endpoint.USER_PROFILE, group,
+//                //when you can access the server
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject serverResponse) {
+//                        try {
+//                            String status = serverResponse.getString("status");
+//                            JSONObject data = serverResponse.getJSONObject("data");
+//                            String serverData = data.toString();
+//                            Log.i("Status",status);
+//                            Log.i("Data response:",data.toString() );
+//                            if (status.equals("success")) {
+//                                progressDialog.dismiss();
+//                                //Toast.makeText(getContext(), "Contribution Group Created Successfully", Toast.LENGTH_LONG).show();
+//                                //Intent in = new Intent(Register2Activity.this, Register3Activity.class);
+//                                //startActivity(in)
+//                            }
+//                            else {
+//                                Log.i("Status",status);
+//                                Log.i("Data response:",data.toString() );
+//                                progressDialog.dismiss();
+//                                //Toast.makeText(getContext(), "Contribution Group Not Created Successfully ", Toast.LENGTH_LONG).show();
+//                            }
+//                        }
+//                        catch (JSONException e) {
+//                            progressDialog.dismiss();
+////                            Log.e("Error:", e.toString());
+//                            //Toast.makeText(getContext(), "Sever not Responding", Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    }
+//                },
+//
+//                //when you cant register the user
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.i("Error:", error.toString());
+//                        progressDialog.dismiss();
+//                        Toast.makeText(getContext(),
+//                                "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//        ){
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                SessionManager sessionManager = new SessionManager(getContext());
+//                //get current user access token
+//                String token = sessionManager.getUserToken().get("token");
+//                headers.put("Authorization",token);
+//                headers.put("Content-Type","application/json");
+//                Log.i("Header", headers.toString());
+//                return  headers;
+//            }
+//
+//        };
+
+
+        TextView name = (TextView) view.findViewById (R.id.name);
+        TextView email = (TextView) view.findViewById (R.id.email);
+        TextView phoneNumber = (TextView) view.findViewById (R.id.phoneNumber);
+        TextView accountNumber = (TextView) view.findViewById (R.id.accountNumber);
+        TextView walletBalance = (TextView) view.findViewById (R.id.walletBalance);
+        Button fundWallet = (Button) view.findViewById (R.id.fund);
+
+        fundWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in = new Intent(HomeFragment.this, ContributionGroupActivity.class);
+                startActivity(in);
+
+
+            }
+        });
+
+
+
+//        name.setText(serverData.name);
+//        email.setText();
+//        phoneNumber.setText();
+//        accountNumber.setText();
+//        walletBalance.setText();
+//
+//
+
 
 
 

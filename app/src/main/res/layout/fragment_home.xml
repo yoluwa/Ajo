@@ -135,11 +135,12 @@
                         android:id="@+id/walletBalance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="000.00"
+                        android:text="00.00"
                         android:textSize="100sp"
                         android:layout_margin="@dimen/text"/>
 
                     <Button
+                        android:id="@+id/fund"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Fund Wallet"
@@ -148,6 +149,28 @@
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/login_btn_size"/>
+
+                    <Button
+                        android:id="@+id/withdraw"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/textPadding"
+                        android:layout_height="wrap_content"
+                        android:text="Withdraw"
+                        android:background="@drawable/colored_rounded_button"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/login_btn_size"/>
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="">
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

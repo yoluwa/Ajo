@@ -12,6 +12,15 @@
         android:roundIcon="@drawable/naira"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+
+        //paystack
+        <meta-data
+            android:name="co.paystack.android.PublicKey"
+            android:value="pk_test_b1ed54f51b2524c5a45d75293560c51120a603ab"/>
+
+
         <activity
             android:name=".activities.english.MainActivity"
             android:theme="@style/NoActionBarTheme" />
