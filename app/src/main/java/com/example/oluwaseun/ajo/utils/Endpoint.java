@@ -14,6 +14,8 @@ public class Endpoint {
     public  static final String USER_PROFILE =  USER + "/profile";
     public static final String CREATE_GROUP = USER + "/group/create";
     public static final String  FUND_REFERENCE = USER + "/wallet/fund";
+
+    public static final String PAYSTACK_INITIALIZE = "https://api.paystack.co/transaction/initialize";
     public Endpoint() {
 
     }

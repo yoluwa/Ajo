@@ -14,27 +14,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/text">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="3"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:text="Personal Details"
                         android:textColor="@color/dark"
-                        android:textSize="30sp"
-                        android:layout_margin="10dp" />
+                        android:textSize="30sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -44,16 +37,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/textPadding"
                             android:text="Name:"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:layout_marginTop="@dimen/textPadding"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -66,16 +59,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/textPadding"
                             android:text="Email Address:"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:layout_marginTop="@dimen/textPadding"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -87,16 +80,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/textPadding"
                             android:text="Phone Number:"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/phoneNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:layout_marginTop="@dimen/textPadding"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -109,72 +102,72 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/textPadding"
                             android:text="Account Number:"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/accountNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize ="20sp"
-                            android:layout_marginTop="@dimen/textPadding"/>
+                            android:layout_marginTop="@dimen/textPadding"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/walletBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="00.00"
+                    android:textSize="70sp" />
+
+                <Button
+                    android:id="@+id/fund"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/colored_rounded_button"
+                    android:text="Fund Wallet"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/login_btn_size" />
+
+                <Button
+                    android:id="@+id/withdraw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/textPadding"
+                    android:background="@drawable/colored_rounded_button"
+                    android:text="Withdraw"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/login_btn_size" />
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/walletBalance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="00.00"
-                        android:textSize="100sp"
-                        android:layout_margin="@dimen/text"/>
-
-                    <Button
-                        android:id="@+id/fund"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Fund Wallet"
-                        android:background="@drawable/colored_rounded_button"
-                        android:textAlignment="center"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/login_btn_size"/>
-
-                    <Button
-                        android:id="@+id/withdraw"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/textPadding"
-                        android:layout_height="wrap_content"
-                        android:text="Withdraw"
-                        android:background="@drawable/colored_rounded_button"
-                        android:textAlignment="center"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/login_btn_size"/>
-
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

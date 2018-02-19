@@ -56,6 +56,7 @@ public class CreateGroupFragment extends Fragment {
     public String reason, frequency;
     private ProgressDialog progressDialog;
 
+
     public CreateGroupFragment() {
         // Required empty public constructor
     }
@@ -162,6 +163,7 @@ public class CreateGroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view= inflater.inflate(R.layout.fragment_create_group, container, false);
+
 
         // NOTE : We are calling the onFragmentInteraction() declared in the MainActivity
         // ie we are sending "Fragment 1" as title parameter when fragment1 is activated
