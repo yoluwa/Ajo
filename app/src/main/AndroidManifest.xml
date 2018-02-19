@@ -63,8 +63,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.english.ContributionGroupActivity" />
         <activity android:name=".activities.yoruba.ContributionGroupYorActivity" />
-        <activity android:name=".activities.english.PaymentScreen" />
-        <activity android:name=".activities.english.WithdrawalScreen"></activity>
+        <activity android:name=".activities.english.WithdrawalScreen" />
+        <activity android:name=".activities.english.PaymentScreensActivity"></activity>
     </application>
 
 </manifest>

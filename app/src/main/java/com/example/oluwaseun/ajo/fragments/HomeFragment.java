@@ -2,6 +2,7 @@ package com.example.oluwaseun.ajo.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -189,13 +190,27 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
+                    Intent intent = new Intent(getActivity(), PaymentScreens.class);
+                    //put the email address in an intent bundle or something...
+                    startActivity(intent);
+
                 }
             });
 
 
+        withdraw = view.findViewById(R.id.withdraw);
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+//                    Intent intent = new Intent(getActivity(), PaymentScreen.class);
+//                    getActivity().startActivity(intent);
 
-            //Fund Wallet opens a new
+                Intent intent = new Intent(getActivity(), PaymentScreen.class);
+                startActivity(intent);
+
+            }
+        });
 
         return view;
     }
