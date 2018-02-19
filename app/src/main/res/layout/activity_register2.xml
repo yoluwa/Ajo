@@ -169,8 +169,8 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/login_btn_size" />
-        </LinearLayout>
 
+    </LinearLayout>
     </LinearLayout>
 
 

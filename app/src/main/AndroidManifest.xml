@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/naira"
@@ -12,14 +11,10 @@
         android:roundIcon="@drawable/naira"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-
         //paystack
         <meta-data
             android:name="co.paystack.android.PublicKey"
-            android:value="pk_test_b1ed54f51b2524c5a45d75293560c51120a603ab"/>
-
+            android:value="pk_test_b1ed54f51b2524c5a45d75293560c51120a603ab" />
 
         <activity
             android:name=".activities.english.MainActivity"
@@ -67,7 +62,9 @@
             android:label="@string/title_activity_dashboard_yor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.english.ContributionGroupActivity" />
-        <activity android:name=".activities.yoruba.ContributionGroupYorActivity"></activity>
+        <activity android:name=".activities.yoruba.ContributionGroupYorActivity" />
+        <activity android:name=".activities.english.PaymentScreen" />
+        <activity android:name=".activities.english.WithdrawalScreen"></activity>
     </application>
 
 </manifest>

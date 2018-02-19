@@ -2,10 +2,8 @@ package com.example.oluwaseun.ajo.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.SessionManager;
-import com.example.oluwaseun.ajo.activities.english.ContributionGroupActivity;
-import com.example.oluwaseun.ajo.activities.english.DashboardActivity;
-import com.example.oluwaseun.ajo.activities.english.LoginActivity;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
 import org.json.JSONException;
@@ -33,12 +28,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import co.paystack.android.Paystack;
-import co.paystack.android.PaystackSdk;
-import co.paystack.android.Transaction;
-import co.paystack.android.model.Card;
-import co.paystack.android.model.Charge;
 
 
 /**
@@ -97,11 +86,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //initializing pastack
-
-        PaystackSdk.initialize(getContext());
-
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -121,149 +105,71 @@ public class HomeFragment extends Fragment {
             mListener.onFragmentInteraction("Home");
         }
 
-        CardView group1 = view.findViewById(R.id.group1);
-        CardView group2 =  view.findViewById(R.id.group2);
-        CardView group3 = view.findViewById(R.id.group3);
-
-        group1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        group2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        group3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        final TextView name = (TextView) view.findViewById (R.id.name);
+        final TextView email = (TextView) view.findViewById (R.id.email);
+        final TextView phoneNumber = (TextView) view.findViewById (R.id.phoneNumber);
+        final TextView accountNumber = (TextView) view.findViewById (R.id.accountNumber);
+        final TextView walletBalance = (TextView) view.findViewById (R.id.walletBalance);
 
 
-        TextView name = (TextView) view.findViewById (R.id.name);
-        TextView email = (TextView) view.findViewById (R.id.email);
-        TextView phoneNumber = (TextView) view.findViewById (R.id.phoneNumber);
-        TextView accountNumber = (TextView) view.findViewById (R.id.accountNumber);
-        TextView walletBalance = (TextView) view.findViewById (R.id.walletBalance);
+        JsonObjectRequest userProfileRequest = new JsonObjectRequest
+                (Request.Method.GET, Endpoint.USER_PROFILE, null, new Response.Listener<JSONObject>() {
 
-
-        fundButton = view.findViewById(R.id.fund);
-        fundButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String cardNumber = "4084084084084081";
-                int expiryMonth = 11; //any month in the future
-                int expiryYear = 18; // any year in the future. '2018' would work also!
-                String cvv = "408";  // cvv of the test card
-
-                Card card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
-                if (card.isValid()) {
-                    // charge card
-
-                    Toast.makeText(getContext(), "Card Valid",Toast.LENGTH_LONG).show();
-                    Charge charge = new Charge();
-                    charge.setCard(card);
-                    PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
-                        @Override
-                        public void onSuccess(Transaction transaction) {
-                            Toast.makeText(getContext()," charged",Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void beforeValidate(Transaction transaction) {
-                            Toast.makeText(getContext(),"charging", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onError(Throwable error, Transaction transaction) {
-                            Log.e("error", transaction.toString());
-                        }
-                    });
-                } else {
-                    //do something
-                    Toast.makeText(getContext(),"error charging", Toast.LENGTH_LONG).show();
-                    Log.e("card error",card.toString());
-                }
-
-
-                Toast.makeText(getContext(), "Charging Card",Toast.LENGTH_LONG).show();
-
-                JSONObject details = new JSONObject();
-                try {
-                    details.put("reference", "23456789056");
-                    details.put ("amount", "5000");
-                    details.put("email", "damaris@gmail.com");
-                }
-                catch (JSONException e){
-
-                }
-
-
-                //volley request to charge card
-
-                JsonObjectRequest chargeCardRequest = new JsonObjectRequest(Endpoint.PAYSTACK_INITIALIZE, details,
-                        //when you can access the server
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject serverResponse) {
-                                try {
-                                    String status = serverResponse.getString("status");
-                                    JSONObject data = serverResponse.getJSONObject("data");
-                                    Log.i("Status",status);
-                                    Log.i("Data response:",data.toString() );
-                                    dataString = data.toString();
-                                    if (status.equals("success")) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(),
-                                                "Card Charged Successfully", Toast.LENGTH_LONG).show();
-                                        //Intent in = new Intent(Register2Activity.this, Register3Activity.class);
-                                        //startActivity(in)
-                                    }
-                                    else {
-                                        // String mem = getMembers(member1String,member2String,member3String,member4String,member5String);
-                                        Log.i("Status",status);
-                                        Log.i("Data response:",data.toString() );
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(),
-                                                "Card Charge Not Successful ", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                                catch (JSONException e) {
-                                    progressDialog.dismiss();
-                                    Log.i("Error:", e.toString());
-                                    Toast.makeText(getContext(),
-                                            "Sever not Responding", Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-                        },
-
-                        //when you cant register the user
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.i("Error:", error.toString());
-                                progressDialog.dismiss();
-                               // Toast.makeText(getContext(),
-                                 //       "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
-
-                                Toast.makeText(getContext(),
-                                        error.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                ){
                     @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
+                    public void onResponse(JSONObject serverResponse) {
+                        try {
+                            String status = serverResponse.getString("status");
+                            JSONObject data = serverResponse.getJSONObject("data");
+                            Log.i("Status",status);
+                            Log.i("Data response:",data.toString() );
+                            if (status.equals("success")) {
+
+                                name.setText("Name: " + data.getString("name"));
+                                email.setText("Email: " + data.getString("email"));
+                                phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                accountNumber.setText("Account Number:" + data.getString("account_number"));
+                                walletBalance.setText(data.getString("wallet_balance"));
+
+
+                                //Retrieve group details to display them either on cardviews or as a group of textboxes...
+
+                                progressDialog.dismiss();
+
+                            }
+                            else {
+                                Log.i("Status",status);
+                                Log.i("Data response:",data.toString() );
+                                   progressDialog.dismiss();
+                                Toast.makeText(getContext(),
+                                       "Unable to get personal details", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        catch (JSONException e) {
+                            progressDialog.dismiss();
+                            Log.e("Error:", e.toString());
+                            Toast.makeText(getContext(),
+                                    "Sever not Responding", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Log.e("Error:", error.toString());
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(),
+                                "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError{
                         Map<String, String> headers = new HashMap<>();
-                        headers.put("Authorization","sk_test_a11fbc3187c55f7046bc513de6307bb7ae0ee7a2");
+                        SessionManager sessionManager = new SessionManager(getContext());
+                        //get current user access token
+                        String token = sessionManager.getUserToken().get("token");
+                        headers.put("Authorization",token);
                         headers.put("Content-Type","application/json");
                         Log.i("Header", headers.toString());
                         return  headers;
@@ -271,44 +177,30 @@ public class HomeFragment extends Fragment {
 
                 };
 
-                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-                requestQueue.add(chargeCardRequest);
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Please wait, your fund request is being processed.");
-                progressDialog.show();
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            requestQueue.add(userProfileRequest);
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Please wait, your details are being fetched");
+            progressDialog.show();
+
+
+            fundButton = view.findViewById(R.id.fund);
+            fundButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
 
 
 
-
-
-
-            }
-
-        });
-
-
-        withdraw = view.findViewById(R.id.withdraw);
-        withdraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Hey hi ", Toast.LENGTH_SHORT).show();
-                Log.e("FUND BtN", "clicked");
-            }
-        });
-
-
-
-
+            //Fund Wallet opens a new
 
         return view;
     }
 
-    public void performCharge(){
-        Charge charge = new Charge();
-        //charge.setCard(card); //sets the card to charge
 
-    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

@@ -249,7 +249,8 @@ public class CreateGroupFragment extends Fragment {
                                         "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
                             }
                         }
-                ){
+                )
+                {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError{
                         Map<String, String> headers = new HashMap<>();
