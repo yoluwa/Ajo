@@ -45,11 +45,12 @@ public class PaymentScreensActivity extends AbstractActivity {
     private EditText expiryMonthField;
     private EditText expiryYearField;
     private EditText cvvField;
+    private EditText amountText;
 
-    private String cardNumber, cvv;
+    private String email, cardNumber, cvv;
     private int expiryMonth, expiryYear;
 
-    public int amount;
+    public int amount1, amount;
     public String paymentReference;
 
 
@@ -58,63 +59,107 @@ public class PaymentScreensActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         //init paystack sdk
         PaystackSdk.initialize(getApplicationContext());
-        setContentView(R.layout.activity_main);
-        //init view
-        Button payBtn = (Button) findViewById(R.id.pay);
 
-        //emailField = (EditText) findViewById(R.id.edit_email_address);
+        setContentView(R.layout.activity_payment_screens);
+        //init view
+        Button pay = (Button) findViewById(R.id.pay);
         cardNumberField = (EditText) findViewById(R.id.cardNumber);
         expiryMonthField = (EditText) findViewById(R.id.month);
         expiryYearField = (EditText) findViewById(R.id.year);
         cvvField = (EditText) findViewById(R.id.cvv);
-        EditText amountText = (EditText)findViewById(R.id.amount);
-        amount = Integer.parseInt(amountText.getText().toString().trim());
+        amountText = (EditText)findViewById(R.id.amount);
+
+        Bundle details = getIntent().getExtras();
+        email = (String)details.getCharSequence("email");
 
 
 
-        payBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!validateForm()) {
-                    return;
-                }
-                try {
-                    //email = emailField.getText().toString().trim();
-                    //cardNumber = cardNumberField.getText().toString().trim();
-                    //expiryMonth = Integer.parseInt(expiryMonthField.getText().toString().trim());
-                    //expiryYear = Integer.parseInt(expiryYearField.getText().toString().trim());
-                    //cvv = cvvField.getText().toString().trim();
 
-                    String cardNumber = "4084084084084081";
-                    int expiryMonth = 11; //any month in the future
-                    int expiryYear = 18; // any year in the future
-                    String cvv = "408";
-                    card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+//        pay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (!validateForm()) {
+//                    Toast.makeText(PaymentScreensActivity.this, "Input Errors", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//                try {
+//
+//                    //cardNumber = cardNumberField.getText().toString().trim();
+//                    //expiryMonth = Integer.parseInt(expiryMonthField.getText().toString().trim());
+//                    //expiryYear = Integer.parseInt(expiryYearField.getText().toString().trim());
+//                    //cvv = cvvField.getText().toString().trim();
+//
+//                    email = emailField.getText().toString().trim();
+//                    String cardNumber = "4084084084084081";
+//                    int expiryMonth = 11; //any month in the future
+//                    int expiryYear = 18; // any year in the future
+//                    String cvv = "408";
+//                    Toast.makeText(PaymentScreensActivity.this, "Card Test", Toast.LENGTH_LONG).show();
+//                    card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+//                    Log.e("Is Card Valid:",String.valueOf(card.isValid()));
+//                    //Toast.makeText(PaymentScreensActivity.this, "Card is Valid", Toast.LENGTH_LONG).show();
+//
+//                    if (card.isValid()) {
+//                        Log.e("Error:",String.valueOf(card.isValid()));
+//                        Toast.makeText(PaymentScreensActivity.this, "Card is Valid", Toast.LENGTH_LONG).show();
+////                        performCharge();
+////                        Toast.makeText(PaymentScreensActivity.this, "Transaction Performed", Toast.LENGTH_LONG).show();
+////                        paymentAPI();
+////                        Intent in = new Intent(PaymentScreensActivity.this, HomeFragment.class);
+////                        startActivity(in);
+//                  } else {
+//                        Toast.makeText(PaymentScreensActivity.this, "Card not Valid", Toast.LENGTH_LONG).show();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//
+//            }
+//        });
+   }
 
-                    if (card.isValid()) {
-                        Toast.makeText(PaymentScreensActivity.this, "Card is Valid", Toast.LENGTH_LONG).show();
-                        performCharge();
-                        paymentAPI();
-                        Intent in = new Intent(PaymentScreensActivity.this, HomeFragment.class);
-                        startActivity(in);
-                    } else {
-                        Toast.makeText(PaymentScreensActivity.this, "Card not Valid", Toast.LENGTH_LONG).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
+    public void payBtn(View view){
+        if (!validateForm()) {
+            Toast.makeText(PaymentScreensActivity.this, "Input Errors", Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        //The error starts from here the try and catch block.....
+        try {
+            email = emailField.getText().toString().trim();
+            String cardNumber = "4084084084084081";
+            int expiryMonth = 11; //any month in the future
+            int expiryYear = 18; // any year in the future
+            String cvv = "408";
+            Toast.makeText(PaymentScreensActivity.this, "Card Test", Toast.LENGTH_LONG).show();
+            card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+            Log.e("Is Card Valid:",String.valueOf(card.isValid()));
 
+            if (card.isValid()) {
+                Log.e("Error:",String.valueOf(card.isValid()));
+                Toast.makeText(PaymentScreensActivity.this, "Card is Valid", Toast.LENGTH_LONG).show();
+                performCharge();
+                Toast.makeText(PaymentScreensActivity.this, "Transaction Performed", Toast.LENGTH_LONG).show();
+                paymentAPI();
+                Intent in = new Intent(PaymentScreensActivity.this, HomeFragment.class);
+                startActivity(in);
+          } else {
+                Toast.makeText(PaymentScreensActivity.this, "Card not Valid", Toast.LENGTH_LONG).show();
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+            }
 
-    }
+        }
+
 
     /**
      * Method to perform the charging of the card
      */
-    private void performCharge() {
+    public void performCharge() {
         //create a Charge object
         charge = new Charge();
 
@@ -124,7 +169,7 @@ public class PaymentScreensActivity extends AbstractActivity {
         //call this method if you set a plan
         //charge.setPlan("PLN_yourplan");
 
-        //charge.setEmail(email); //dummy email address
+        charge.setEmail(email); //dummy email address
 
         charge.setAmount(amount); //test amount
 
@@ -153,7 +198,7 @@ public class PaymentScreensActivity extends AbstractActivity {
         });
     }
 
-    private boolean validateForm() {
+    public boolean validateForm() {
         boolean valid = true;
 
 
@@ -189,10 +234,20 @@ public class PaymentScreensActivity extends AbstractActivity {
             cvvField.setError(null);
         }
 
+        String amountTexts = amountText.getText().toString();
+        if (TextUtils.isEmpty(amountTexts)) {
+            amountText.setError("Required.");
+            valid = false;
+        } else {
+            amountText.setError(null);
+            amount1 = Integer.parseInt(amountText.getText().toString().trim());
+            amount = amount1 * 100;
+        }
+
         return valid;
     }
 
-    private void paymentAPI(){
+    public void paymentAPI(){
 
         JSONObject refData = new JSONObject();
         //EditText h = (EditText)view.findViewById(R.id.member1);
@@ -221,7 +276,6 @@ public class PaymentScreensActivity extends AbstractActivity {
                                         "", Toast.LENGTH_LONG).show();
                             }
                             else {
-                                // String mem = getMembers(member1String,member2String,member3String,member4String,member5String);
                                 Log.i("Status",status);
                                 Log.i("Data response:",data.toString() );
                                 //progressDialog.dismiss();
