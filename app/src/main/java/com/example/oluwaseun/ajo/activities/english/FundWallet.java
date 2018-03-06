@@ -27,32 +27,41 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WithdrawalScreen extends AbstractActivity {
+import co.paystack.android.PaystackSdk;
+
+public class FundWallet extends AbstractActivity {
 
     public int amount1, amount;
     private EditText amountText;
+    private EditText cardNumberField;
+    private EditText expiryMonthField;
+    private EditText expiryYearField;
+    private EditText cvvField;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_withdrawal_screen);
+        setContentView(R.layout.activity_fund_wallet);
 
+        //init paystack sdk
+        PaystackSdk.initialize(getApplicationContext());
 
         Button pay = (Button) findViewById(R.id.pay);
+        cardNumberField = (EditText) findViewById(R.id.cardNumber);
+        expiryMonthField = (EditText) findViewById(R.id.month);
+        expiryYearField = (EditText) findViewById(R.id.year);
+        cvvField = (EditText) findViewById(R.id.cvv);
         amountText = (EditText)findViewById(R.id.amount);
+
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String amountTexts = amountText.getText().toString();
-                if (TextUtils.isEmpty(amountTexts)) {
-                    amountText.setError("Required.");
-                } else {
-                    amountText.setError(null);
-                    amount1 = Integer.parseInt(amountText.getText().toString().trim());
-                    amount = amount1 * 100;
+                if (!validateForm()) {
+                    Toast.makeText(FundWallet.this, "Input Errors", Toast.LENGTH_LONG).show();
+                    return;
                 }
 
                 JSONObject amountData = new JSONObject();
@@ -64,7 +73,7 @@ public class WithdrawalScreen extends AbstractActivity {
                 }
                 //Volley Request for the group
 
-                JsonObjectRequest fundRequest = new JsonObjectRequest(Endpoint.WITHDRAW, amountData,
+                JsonObjectRequest fundRequest = new JsonObjectRequest(Endpoint.FUND, amountData,
                         //when you can access the server
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -78,7 +87,7 @@ public class WithdrawalScreen extends AbstractActivity {
 //                                        progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(),
                                                 "Transaction Successful", Toast.LENGTH_LONG).show();
-                                        Intent in = new Intent(WithdrawalScreen.this, DashboardActivity.class);
+                                        Intent in = new Intent(FundWallet.this, DashboardActivity.class);
                                         startActivity(in);
                                     }
                                     else {
@@ -120,7 +129,7 @@ public class WithdrawalScreen extends AbstractActivity {
                         String token = sessionManager.getUserToken().get("token");
                         headers.put("Authorization",token);
                         headers.put("Content-Type","application/json");
-                        Log.i("Header", headers.toString());
+//                        Log.i("Header", headers.toString());
                         return  headers;
                     }
 
@@ -132,7 +141,59 @@ public class WithdrawalScreen extends AbstractActivity {
 //                progressDialog.setMessage("Please wait, your wallet is being funded");
 //                progressDialog.show();
 
+
             }
         });
     }
+
+
+    public boolean validateForm() {
+        boolean valid = true;
+
+
+        String cardNumber = cardNumberField.getText().toString();
+        if (TextUtils.isEmpty(cardNumber)) {
+            cardNumberField.setError("Required.");
+            valid = false;
+        } else {
+            cardNumberField.setError(null);
+        }
+
+        String expiryMonth = expiryMonthField.getText().toString();
+        if (TextUtils.isEmpty(expiryMonth)) {
+            expiryMonthField.setError("Required.");
+            valid = false;
+        } else {
+            expiryMonthField.setError(null);
+        }
+
+        String expiryYear = expiryYearField.getText().toString();
+        if (TextUtils.isEmpty(expiryYear)) {
+            expiryYearField.setError("Required.");
+            valid = false;
+        } else {
+            expiryYearField.setError(null);
+        }
+
+        String cvv = cvvField.getText().toString();
+        if (TextUtils.isEmpty(cvv)) {
+            cvvField.setError("Required.");
+            valid = false;
+        } else {
+            cvvField.setError(null);
+        }
+
+        String amountTexts = amountText.getText().toString();
+        if (TextUtils.isEmpty(amountTexts)) {
+            amountText.setError("Required.");
+            valid = false;
+        } else {
+            amountText.setError(null);
+            amount1 = Integer.parseInt(amountText.getText().toString().trim());
+            amount = amount1 * 100;
+        }
+
+        return valid;
+    }
+
 }

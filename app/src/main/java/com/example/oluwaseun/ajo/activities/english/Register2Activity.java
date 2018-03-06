@@ -15,7 +15,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.AbstractActivity;
-import com.example.oluwaseun.ajo.models.User;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
 import org.json.JSONException;
@@ -31,7 +30,7 @@ public class Register2Activity extends AbstractActivity {
             bankNameString;
     public String emailString, passwordString, passwordStr, confirmPasswordString, securityQuestionString,
             answerToSecurityQuestionString;
-    public int phone, account_number, bvn;
+    public long phone, account_number, bvn;
 
 
     @Override
@@ -80,16 +79,28 @@ public class Register2Activity extends AbstractActivity {
 
     private void getUserData(View view) {
 
-        User user = (User) getIntent().getSerializableExtra("user");
-        nameString = user.getName();
-        dateOfBirth = user.getDateOfBirth();
-        bvnString = user.getBvn();
-        //bvn = Integer.valueOf(bvnString);
-        phoneNumberString = user.getPhoneNumber();
-//        phone = Integer.valueOf(phoneNumberString);
-        accountNumberString = user.getAccountNumber();
-//        account_number = Integer.valueOf(accountNumberString);
-        bankNameString = user.getBankName();
+        //User user = (User) getIntent().getSerializableExtra("user");
+        Bundle userDetails = getIntent().getExtras();
+        nameString = String.valueOf(userDetails.getCharSequence("name"));
+        dateOfBirth = String.valueOf(userDetails.getCharSequence("DOB"));
+        bvnString = String.valueOf(userDetails.getCharSequence("bvn"));
+        bvn = Long.valueOf(bvnString);
+        phoneNumberString = String.valueOf(userDetails.getCharSequence("phone"));
+        phone = Long.valueOf(phoneNumberString);
+        accountNumberString = String.valueOf(userDetails.getCharSequence("account"));
+        account_number = Long.valueOf(accountNumberString);
+        bankNameString = String.valueOf(userDetails.getCharSequence("bank"));
+
+
+//        nameString = user.getName();
+//        dateOfBirth = user.getDateOfBirth();
+//        bvnString = user.getBvn();
+//        //bvn = Integer.valueOf(bvnString);
+//        phoneNumberString = user.getPhoneNumber();
+////        phone = Integer.valueOf(phoneNumberString);
+//        accountNumberString = user.getAccountNumber();
+////        account_number = Integer.valueOf(accountNumberString);
+//        bankNameString = user.getBankName();
     }
 
     public void createAccount(View v) {

@@ -50,7 +50,9 @@ public class CreateGroupFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public String groupNameString, member1String, member2String, member3String,
-            member4String, member5String;
+            member4String, member5String, amountString;
+
+    public int amount;
    // public String membersString;
 
     public String reason, frequency;
@@ -110,6 +112,9 @@ public class CreateGroupFragment extends Fragment {
     public void getGroupData(View view) {
         EditText groupName = (EditText) view.findViewById(R.id.groupName);
         groupNameString = groupName.getText().toString().trim();
+        EditText amounts = (EditText) view.findViewById(R.id.amount);
+        amountString = amounts.getText().toString().trim();
+        amount = Integer.parseInt(amountString) * 100;
         EditText member1 = (EditText) view.findViewById(R.id.member1);
         member1String = member1.getText().toString().trim();
         EditText member2 = view.findViewById(R.id.member2);
@@ -197,6 +202,7 @@ public class CreateGroupFragment extends Fragment {
                     group.put ("reason", reason);
                     group.put("frequency", frequency);
                     group.put("members", members);
+                    group.put("amount", amount);
                 }
                 catch (JSONException e){
 

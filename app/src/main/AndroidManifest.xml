@@ -64,7 +64,8 @@
         <activity android:name=".activities.english.ContributionGroupActivity" />
         <activity android:name=".activities.yoruba.ContributionGroupYorActivity" />
         <activity android:name=".activities.english.WithdrawalScreen" />
-        <activity android:name=".activities.english.PaymentScreensActivity"></activity>
+        <activity android:name=".activities.english.PaymentScreensActivity" />
+        <activity android:name=".activities.english.FundWallet"></activity>
     </application>
 
 </manifest>

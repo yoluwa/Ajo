@@ -2,13 +2,13 @@ package com.example.oluwaseun.ajo.activities.english;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.AbstractActivity;
-import com.example.oluwaseun.ajo.models.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +53,7 @@ public class Register1Activity extends AbstractActivity {
         phoneNumberString = phoneNumber.getText().toString().trim();
         if (phoneNumberString.length() != 11 && phoneNumberString.isEmpty()) {
             correct = true;
-            bvn.setError("Invalid BVN");
+            phoneNumber.setError("Invalid BVN");
         }
 
         EditText accountNumber = (EditText) findViewById(R.id.accountNumber);
@@ -76,10 +76,19 @@ public class Register1Activity extends AbstractActivity {
             Toast.makeText(getApplicationContext(),"Some input Errors",Toast.LENGTH_LONG).show();
             return;
         }else{
-            User user = new User(nameString, dateOfBirth, bvnString, phoneNumberString,
-                    accountNumberString, bankNameString);
+//            User user = new User(nameString, dateOfBirth, bvnString, phoneNumberString,
+//                    accountNumberString, bankNameString);
             Intent in = new Intent(Register1Activity.this, Register2Activity.class);
-            in.putExtra("user", user);
+            Bundle userDetails = new Bundle();
+            userDetails.putString("name", nameString);
+            userDetails.putString("DOB", dateOfBirth);
+            userDetails.putString("bvn", bvnString);
+            userDetails.putString("phone", phoneNumberString);
+            Log.i("phone", phoneNumberString);
+            userDetails.putString("account", accountNumberString);
+            Log.i("account", accountNumberString);
+            userDetails.putString("bank", bankNameString);
+            in.putExtras(userDetails);
             startActivity(in);
         }
 

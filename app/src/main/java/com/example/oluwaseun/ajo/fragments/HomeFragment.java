@@ -22,6 +22,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.SessionManager;
+import com.example.oluwaseun.ajo.activities.english.FundWallet;
+import com.example.oluwaseun.ajo.activities.english.WithdrawalScreen;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
 import org.json.JSONException;
@@ -128,8 +130,8 @@ public class HomeFragment extends Fragment {
                                 name.setText("Name: " + data.getString("name"));
                                 email.setText("Email: " + data.getString("email"));
                                 phoneNumber.setText("Phone Number: " + data.getString("phone"));
-                                accountNumber.setText("Account Number:" + data.getString("account_number"));
-                                walletBalance.setText(data.getString("wallet_balance"));
+                                accountNumber.setText("Account Number: " + data.getString("account_number"));
+                                walletBalance.setText("N" + Integer.parseInt(data.getString("wallet_balance"))/100 );
 
 
                                 //Retrieve group details to display them either on cardviews or as a group of textboxes...
@@ -190,8 +192,7 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(getActivity(), PaymentScreens.class);
-                    //put the email address in an intent bundle or something...
+                    Intent intent = new Intent(getActivity(), FundWallet.class);
                     startActivity(intent);
 
                 }
@@ -203,10 +204,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                    Intent intent = new Intent(getActivity(), PaymentScreen.class);
-//                    getActivity().startActivity(intent);
 
-                Intent intent = new Intent(getActivity(), PaymentScreen.class);
+                Intent intent = new Intent(getActivity(), WithdrawalScreen.class);
                 startActivity(intent);
 
             }

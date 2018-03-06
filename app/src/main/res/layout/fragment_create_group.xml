@@ -120,6 +120,16 @@
                     android:hint="@string/groupName"
                     android:inputType="text" />
 
+                <EditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/dark"
+                    android:hint="Amount for Contribution in Naira"
+                    android:inputType="number" />
+
                 <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
