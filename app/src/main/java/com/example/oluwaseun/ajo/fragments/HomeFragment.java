@@ -26,6 +26,7 @@ import com.example.oluwaseun.ajo.activities.english.FundWallet;
 import com.example.oluwaseun.ajo.activities.english.WithdrawalScreen;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -115,6 +116,13 @@ public class HomeFragment extends Fragment {
         final TextView walletBalance = (TextView) view.findViewById (R.id.walletBalance);
 
 
+        final TextView group1Name = (TextView) view.findViewById(R.id.group1Name);
+        final TextView group2Name = (TextView) view.findViewById(R.id.group2Name);
+        final TextView group3Name = (TextView) view.findViewById(R.id.group3Name);
+        final TextView group1Details = (TextView) view.findViewById(R.id.group1Details);
+        final TextView group2Details = (TextView) view.findViewById(R.id.group2Details);
+        final TextView group3Details = (TextView) view.findViewById(R.id.group3Details);
+
         JsonObjectRequest userProfileRequest = new JsonObjectRequest
                 (Request.Method.GET, Endpoint.USER_PROFILE, null, new Response.Listener<JSONObject>() {
 
@@ -123,20 +131,51 @@ public class HomeFragment extends Fragment {
                         try {
                             String status = serverResponse.getString("status");
                             JSONObject data = serverResponse.getJSONObject("data");
+
+                            //I need to check for the presence of an empty group....
+                            JSONArray group =  data.getJSONArray("groups");
+                            JSONObject group1 = group.getJSONObject(0);
+                            JSONObject admin = group1.getJSONObject("creator");
+                            JSONArray members = group1.getJSONArray("members");
                             Log.i("Status",status);
                             Log.i("Data response:",data.toString() );
                             if (status.equals("success")) {
 
-                                name.setText("Name: " + data.getString("name"));
-                                email.setText("Email: " + data.getString("email"));
-                                phoneNumber.setText("Phone Number: " + data.getString("phone"));
-                                accountNumber.setText("Account Number: " + data.getString("account_number"));
-                                walletBalance.setText("N" + Integer.parseInt(data.getString("wallet_balance"))/100 );
 
 
-                                //Retrieve group details to display them either on cardviews or as a group of textboxes...
 
-                                progressDialog.dismiss();
+                                if (group.isNull(0)) {
+
+                                    // if group is empty then this
+                                    name.setText("Name: " + data.getString("name"));
+                                    email.setText("Email: " + data.getString("email"));
+                                    phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                    accountNumber.setText("Account Number: " + data.getString("account_number"));
+                                    walletBalance.setText("NGN" + Integer.parseInt(data.getString("wallet_balance"))/100 );
+
+                                    progressDialog.dismiss();
+
+
+                                }
+
+                                else{
+
+                                    //if group is not empty.. then this
+                                    name.setText("Name: " + data.getString("name"));
+                                    email.setText("Email: " + data.getString("email"));
+                                    phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                    accountNumber.setText("Account Number: " + data.getString("account_number"));
+                                    walletBalance.setText("NGN" + Integer.parseInt(data.getString("wallet_balance"))/100 );
+
+                                    //Retrieve group details to display them as a group of textboxes...
+                                    group1Name.setText(group1.getString("name"));
+                                    group1Details.setText("Members:" + members.length() + "\n" + "Admin:" + admin.getString("name") );
+
+                                    progressDialog.dismiss();
+
+                                }
+
+
 
                             }
                             else {
@@ -203,8 +242,6 @@ public class HomeFragment extends Fragment {
         withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent intent = new Intent(getActivity(), WithdrawalScreen.class);
                 startActivity(intent);
 

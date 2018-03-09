@@ -75,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="00.00"
+                    android:textColor="@color/dark"
                     android:textSize="70sp" />
 
                 <Button
@@ -160,7 +161,7 @@
                             android:text="@string/group1Name"/>
 
                         <TextView
-                            android:id="@+id/groupDetails"
+                            android:id="@+id/group1Details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/group1Name"
