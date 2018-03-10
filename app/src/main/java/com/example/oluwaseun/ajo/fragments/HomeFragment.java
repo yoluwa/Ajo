@@ -112,6 +112,7 @@ public class HomeFragment extends Fragment {
         final TextView name = (TextView) view.findViewById (R.id.name);
         final TextView email = (TextView) view.findViewById (R.id.email);
         final TextView phoneNumber = (TextView) view.findViewById (R.id.phoneNumber);
+        final TextView bankName = (TextView) view.findViewById (R.id.bankName);
         final TextView accountNumber = (TextView) view.findViewById (R.id.accountNumber);
         final TextView walletBalance = (TextView) view.findViewById (R.id.walletBalance);
 
@@ -132,50 +133,122 @@ public class HomeFragment extends Fragment {
                             String status = serverResponse.getString("status");
                             JSONObject data = serverResponse.getJSONObject("data");
 
-                            //I need to check for the presence of an empty group....
-                            JSONArray group =  data.getJSONArray("groups");
-                            JSONObject group1 = group.getJSONObject(0);
-                            JSONObject admin = group1.getJSONObject("creator");
-                            JSONArray members = group1.getJSONArray("members");
                             Log.i("Status",status);
                             Log.i("Data response:",data.toString() );
                             if (status.equals("success")) {
-
-
-
-
-                                if (group.isNull(0)) {
+                                //I need to check for the presence of an empty group....
+                                JSONArray group =  data.getJSONArray("groups");
+                                String numberOfGroups = String.valueOf(group.length());
+                                Log.i("Number of Groups",numberOfGroups);
+                                //boolean check = false
+                                if (numberOfGroups.equals("0"))  {
 
                                     // if group is empty then this
                                     name.setText("Name: " + data.getString("name"));
                                     email.setText("Email: " + data.getString("email"));
                                     phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                    bankName.setText("Name of Bank: " + data.getString("bank_name"));
                                     accountNumber.setText("Account Number: " + data.getString("account_number"));
                                     walletBalance.setText("NGN" + Integer.parseInt(data.getString("wallet_balance"))/100 );
 
                                     progressDialog.dismiss();
 
-
                                 }
-
-                                else{
+                                else if(numberOfGroups.equals("1")) {
+                                    JSONObject group1 = group.getJSONObject(0);
+                                    JSONObject admin = group1.getJSONObject("creator");
+                                    JSONArray members = group1.getJSONArray("members");
 
                                     //if group is not empty.. then this
                                     name.setText("Name: " + data.getString("name"));
                                     email.setText("Email: " + data.getString("email"));
                                     phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                    bankName.setText("Name of Bank: " + data.getString("bank_name"));
                                     accountNumber.setText("Account Number: " + data.getString("account_number"));
                                     walletBalance.setText("NGN" + Integer.parseInt(data.getString("wallet_balance"))/100 );
 
                                     //Retrieve group details to display them as a group of textboxes...
+
+                                    //for loop to
+
                                     group1Name.setText(group1.getString("name"));
-                                    group1Details.setText("Members:" + members.length() + "\n" + "Admin:" + admin.getString("name") );
+                                    group1Details.setText("Name:" + group1.getString("name")  + "\n" +"Number of Members:" + members.length() + "\n" + "Admin:" + admin.getString("name") );
+
+
 
                                     progressDialog.dismiss();
 
                                 }
 
+                                else if(numberOfGroups.equals("2")){
 
+                                    JSONObject group1 = group.getJSONObject(0);
+                                    JSONObject admin1 = group1.getJSONObject("creator");
+                                    JSONArray members1 = group1.getJSONArray("members");
+
+                                    JSONObject group2 = group.getJSONObject(1);
+                                    JSONObject admin2 = group2.getJSONObject("creator");
+                                    JSONArray members2 = group2.getJSONArray("members");
+
+                                    //if group is not empty.. then this
+                                    name.setText("Name: " + data.getString("name"));
+                                    email.setText("Email: " + data.getString("email"));
+                                    phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                    bankName.setText("Name of Bank: " + data.getString("bank_name"));
+                                    accountNumber.setText("Account Number: " + data.getString("account_number"));
+                                    walletBalance.setText("NGN" + Integer.parseInt(data.getString("wallet_balance"))/100 );
+
+                                    //Retrieve group details to display them as a group of textboxes...
+
+                                    //for loop to
+
+                                    group1Name.setText(group1.getString("name"));
+                                    group1Details.setText("Name:" + group1.getString("name")  + "\n" +"Number of Members:" + members1.length() + "\n" + "Admin:" + admin1.getString("name") );
+
+                                    group2Name.setText(group2.getString("name"));
+                                    group2Details.setText("Name:" + group2.getString("name")  + "\n" +"Number of Members:" + members2.length() + "\n" + "Admin:" + admin2.getString("name") );
+
+                                    progressDialog.dismiss();
+
+                                }
+
+                                else {
+
+                                    JSONObject group1 = group.getJSONObject(0);
+                                    JSONObject admin1 = group1.getJSONObject("creator");
+                                    JSONArray members1 = group1.getJSONArray("members");
+
+                                    JSONObject group2 = group.getJSONObject(1);
+                                    JSONObject admin2 = group2.getJSONObject("creator");
+                                    JSONArray members2 = group2.getJSONArray("members");
+
+                                    JSONObject group3 = group.getJSONObject(2);
+                                    JSONObject admin3 = group2.getJSONObject("creator");
+                                    JSONArray members3 = group2.getJSONArray("members");
+
+                                    //if group is not empty.. then this
+                                    name.setText("Name: " + data.getString("name"));
+                                    email.setText("Email: " + data.getString("email"));
+                                    phoneNumber.setText("Phone Number: " + data.getString("phone"));
+                                    bankName.setText("Name of Bank: " + data.getString("bank_name"));
+                                    accountNumber.setText("Account Number: " + data.getString("account_number"));
+                                    walletBalance.setText("NGN" + Integer.parseInt(data.getString("wallet_balance"))/100 );
+
+                                    //Retrieve group details to display them as a group of textboxes...
+
+                                    //for loop to
+
+                                    group1Name.setText(group1.getString("name"));
+                                    group1Details.setText("Name:" + group1.getString("name")  + "\n" +"Number of Members:" + members1.length() + "\n" + "Admin:" + admin1.getString("name") );
+
+                                    group2Name.setText(group2.getString("name"));
+                                    group2Details.setText("Name:" + group2.getString("name")  + "\n" +"Number of Members:" + members2.length() + "\n" + "Admin:" + admin2.getString("name") );
+
+                                    group3Name.setText(group3.getString("name"));
+                                    group3Details.setText("Name:" + group3.getString("name")  + "\n" +"Number of Members:" + members3.length() + "\n" + "Admin:" + admin3.getString("name") );
+
+                                    progressDialog.dismiss();
+                                }
 
                             }
                             else {
@@ -247,6 +320,9 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+
+        //view buttons for the group.
 
         return view;
     }

@@ -2,6 +2,7 @@ package com.example.oluwaseun.ajo.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.oluwaseun.ajo.R;
 import com.example.oluwaseun.ajo.activities.SessionManager;
+import com.example.oluwaseun.ajo.activities.english.DashboardActivity;
 import com.example.oluwaseun.ajo.utils.Endpoint;
 
 import org.json.JSONException;
@@ -110,11 +112,29 @@ public class CreateGroupFragment extends Fragment {
     }
 
     public void getGroupData(View view) {
+
+//        boolean correct = false;
+
         EditText groupName = (EditText) view.findViewById(R.id.groupName);
         groupNameString = groupName.getText().toString().trim();
+//        if (TextUtils.isEmpty(groupNameString)){
+//            groupName.setError("Required");
+//            correct = true;
+//        } else{
+//            groupName.setError(null);
+//        }
+
         EditText amounts = (EditText) view.findViewById(R.id.amount);
         amountString = amounts.getText().toString().trim();
         amount = Integer.parseInt(amountString) * 100;
+//        if (TextUtils.isEmpty(amountString)){
+//            amounts.setError("Required");
+//            correct = true;
+//        } else{
+//            amounts.setError(null);
+//            amount = Integer.parseInt(amountString) * 100;
+//        }
+
         EditText member1 = (EditText) view.findViewById(R.id.member1);
         member1String = member1.getText().toString().trim();
         EditText member2 = view.findViewById(R.id.member2);
@@ -162,6 +182,8 @@ public class CreateGroupFragment extends Fragment {
             frequency = "none";
         }
 
+     //   return correct;
+
     }
 
     @Override
@@ -192,96 +214,106 @@ public class CreateGroupFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                JSONObject group = new JSONObject();
-                getGroupData(view);
-                String members = getMembers(member1String,member2String,member3String,member4String,member5String);
-                //EditText h = (EditText)view.findViewById(R.id.member1);
-                Log.i("members",members);
-                try {
-                    group.put("name", groupNameString);
-                    group.put ("reason", reason);
-                    group.put("frequency", frequency);
-                    group.put("members", members);
-                    group.put("amount", amount);
-                }
-                catch (JSONException e){
+//                if (getGroupData(v)) {
+//                    Toast.makeText(getContext(),"Some input Errors",Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//
+//                else{
+                    getGroupData(view);
+                    JSONObject group = new JSONObject();
+                    String members = getMembers(member1String,member2String,member3String,member4String,member5String);
+                    Log.i("members",members);
+                    try {
+                        group.put("name", groupNameString);
+                        group.put ("reason", reason);
+                        group.put("frequency", frequency);
+                        group.put("members", members);
+                        group.put("amount", amount);
+                    }
+                    catch (JSONException e){
 
-                }
-                //Volley Request for the group
+                    }
+                    //Volley Request for the group
 
-                JsonObjectRequest createGroupRequest = new JsonObjectRequest(Endpoint.CREATE_GROUP, group,
-                        //when you can access the server
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject serverResponse) {
-                                try {
-                                    String status = serverResponse.getString("status");
-                                    JSONObject data = serverResponse.getJSONObject("data");
-                                    Log.i("Status",status);
-                                    Log.i("Data response:",data.toString() );
-                                    if (status.equals("success")) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(),
-                                                "Contribution Group Created Successfully", Toast.LENGTH_LONG).show();
-                                        //Intent in = new Intent(Register2Activity.this, Register3Activity.class);
-                                        //startActivity(in)
-                                    }
-                                    else {
-                                       // String mem = getMembers(member1String,member2String,member3String,member4String,member5String);
+                    JsonObjectRequest createGroupRequest = new JsonObjectRequest(Endpoint.CREATE_GROUP, group,
+                            //when you can access the server
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject serverResponse) {
+                                    try {
+                                        String status = serverResponse.getString("status");
+                                        JSONObject data = serverResponse.getJSONObject("data");
                                         Log.i("Status",status);
                                         Log.i("Data response:",data.toString() );
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(),
-                                                "Contribution Group Not Created Successfully ", Toast.LENGTH_LONG).show();
+                                        if (status.equals("success")) {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getContext(),
+                                                    "Contribution Group Created Successfully", Toast.LENGTH_LONG).show();
+                                            Intent in = new Intent(getActivity(), DashboardActivity.class);
+                                            startActivity(in);
+                                        }
+                                        else {
+                                            // String mem = getMembers(member1String,member2String,member3String,member4String,member5String);
+                                            Log.i("Status",status);
+                                            Log.i("Data response:",data.toString() );
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getContext(),
+                                                    "Contribution Group Not Created Successfully ", Toast.LENGTH_LONG).show();
+                                        }
                                     }
-                                }
-                                catch (JSONException e) {
-                                    progressDialog.dismiss();
+                                    catch (JSONException e) {
+                                        progressDialog.dismiss();
 //                            Log.e("Error:", e.toString());
-                                    Toast.makeText(getContext(),
-                                            "Sever not Responding", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(),
+                                                "Sever not Responding", Toast.LENGTH_LONG).show();
+                                    }
+
                                 }
+                            },
 
+                            //when you cant register the user
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.i("Error:", error.toString());
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(),
+                                            "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        },
-
-                        //when you cant register the user
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.i("Error:", error.toString());
-                                progressDialog.dismiss();
-                                Toast.makeText(getContext(),
-                                        "Unable to access the Server Try again later.", Toast.LENGTH_LONG).show();
-                            }
+                    )
+                    {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> headers = new HashMap<>();
+                            SessionManager sessionManager = new SessionManager(getContext());
+                            //get current user access token
+                            String token = sessionManager.getUserToken().get("token");
+                            headers.put("Authorization",token);
+                            headers.put("Content-Type","application/json");
+                            Log.i("Header", headers.toString());
+                            return  headers;
                         }
-                )
-                {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError{
-                        Map<String, String> headers = new HashMap<>();
-                        SessionManager sessionManager = new SessionManager(getContext());
-                        //get current user access token
-                        String token = sessionManager.getUserToken().get("token");
-                        headers.put("Authorization",token);
-                        headers.put("Content-Type","application/json");
-                        Log.i("Header", headers.toString());
-                        return  headers;
-                    }
 
-                };
+                    };
 
-                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-                requestQueue.add(createGroupRequest);
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Please wait, your contribution group is being created.");
-                progressDialog.show();
+                    RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                    requestQueue.add(createGroupRequest);
+                    progressDialog = new ProgressDialog(getContext());
+                    progressDialog.setMessage("Please wait, your contribution group is being created.");
+                    progressDialog.show();
+
+                //}
+
 
             }
         });
 
 
         return view;
+
+
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event

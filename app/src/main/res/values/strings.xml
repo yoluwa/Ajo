@@ -65,12 +65,12 @@
 
     <string name="activeGroups">Active Contribution Groups</string>
     <string name="archivedGroups">Archived Contribution Groups</string>
-    <string name="group1Name">Ajo Group 1</string>
-    <string name="group2Name">Ajo Group 1</string>
-    <string name="group3Name">Ajo Group 1</string>
-    <string name="group1Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
-    <string name="group2Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
-    <string name="group3Details">Name:Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
+    <string name="group1Name">Sample Ajo Group 1</string>
+    <string name="group2Name">Sample Ajo Group 2</string>
+    <string name="group3Name">Sample Ajo Group 3</string>
+    <string name="group1Details">Name:Sample Ajo Group 1\n Number of Members:4 \n Status:Paid</string>
+    <string name="group2Details">Name:Sample Ajo Group 2\n Number of Members:4 \n Status:Paid</string>
+    <string name="group3Details">Name:Sample Ajo Group 3\n Number of Members:4 \n Status:Paid</string>
 
     <string name="createGroup">"Create Contribution Group"</string>
     <string name="home">"Home"</string>
